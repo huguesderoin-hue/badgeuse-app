@@ -24,30 +24,38 @@
   --border:#1e2d45;
 }
 body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;overflow-x:hidden}
-nav{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border);background:var(--bg);position:sticky;top:0;z-index:100;backdrop-filter:blur(10px)}
-.nav-title{font-size:14px;font-weight:700;letter-spacing:.1em;color:var(--accent)}
+
+/* NAV — icône seule, sans texte */
+nav{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid var(--border);background:var(--bg);position:sticky;top:0;z-index:100;backdrop-filter:blur(10px)}
+.nav-icon{font-size:22px;line-height:1}
 .nav-tabs{display:flex;gap:4px}
 .tab{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--muted);transition:all .2s;letter-spacing:.05em}
 .tab.active{background:var(--accent);color:#000}
 .tab:hover:not(.active){color:var(--text);background:var(--surface2)}
+
 .page{display:none;padding:20px;animation:fadeIn .3s ease}
 .page.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.badge-hero{text-align:center;padding:32px 0 24px}
-.badge-hero h1{font-size:28px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
-.badge-hero p{color:var(--muted);font-size:13px;font-family:'DM Mono',monospace}
-.status-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;margin:0 0 20px;text-align:center;position:relative;overflow:hidden}
+
+/* HERO — heure courante agrandie, sous-titre supprimé */
+.badge-hero{text-align:center;padding:24px 0 20px}
+.badge-hero h1{font-size:28px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px}
+.live-clock{font-family:'DM Mono',monospace;font-size:48px;font-weight:500;color:var(--text);letter-spacing:.04em;line-height:1}
+
+/* STATUS CARD — sans sous-titre */
+.status-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px 24px;margin:0 0 16px;text-align:center;position:relative;overflow:hidden}
 .status-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transition:transform .5s ease;transform-origin:left}
 .status-card.open::before{transform:scaleX(1);background:var(--red)}
 .status-card.closed::before{transform:scaleX(1);background:var(--green)}
-.status-dot{width:12px;height:12px;border-radius:50%;background:var(--muted);display:inline-block;margin-right:8px;vertical-align:middle}
+.status-dot{width:10px;height:10px;border-radius:50%;background:var(--muted);display:inline-block;margin-right:7px;vertical-align:middle}
 .status-dot.open{background:var(--red);box-shadow:0 0 10px var(--red);animation:pulse 1.5s infinite}
 .status-dot.closed{background:var(--green);box-shadow:0 0 10px var(--green)}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.status-label{font-size:13px;font-weight:600;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
-.status-time{font-family:'DM Mono',monospace;font-size:36px;font-weight:500;color:var(--text);letter-spacing:.05em}
-.status-sub{font-size:12px;color:var(--muted);margin-top:6px;font-family:'DM Mono',monospace}
-.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}
+.status-label{font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.status-time{font-family:'DM Mono',monospace;font-size:28px;font-weight:500;color:var(--text);letter-spacing:.04em}
+
+/* BTNS */
+.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
 .btn{padding:18px;border-radius:14px;font-family:'Syne',sans-serif;font-size:15px;font-weight:700;border:none;cursor:pointer;transition:all .2s;letter-spacing:.05em;display:flex;flex-direction:column;align-items:center;gap:6px}
 .btn-icon{font-size:24px}
 .btn-start{background:var(--green);color:#000}
@@ -57,29 +65,47 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:16px 2
 .btn-stop:hover{transform:scale(1.03);box-shadow:0 8px 24px rgba(255,77,109,.3)}
 .btn-stop:active{transform:scale(.97)}
 .btn:disabled{opacity:.4;cursor:not-allowed;transform:none !important}
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--surface2);border:1px solid var(--accent);color:var(--text);padding:12px 24px;border-radius:12px;font-size:13px;font-weight:600;z-index:999;transition:transform .3s ease;white-space:nowrap}
-.toast.show{transform:translateX(-50%) translateY(0)}
-.stats-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}
-.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px}
-.stat-label{font-size:11px;color:var(--muted);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px}
+.stat-label{font-size:11px;color:var(--muted);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
 .stat-value{font-family:'DM Mono',monospace;font-size:22px;font-weight:500;color:var(--text)}
 .stat-value.accent{color:var(--accent)}
-.section-title{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin:24px 0 12px;display:flex;justify-content:space-between;align-items:center}
-.refresh-btn{background:var(--surface2);border:1px solid var(--border);color:var(--muted);padding:4px 12px;border-radius:8px;font-size:11px;cursor:pointer;font-family:'Syne',sans-serif;font-weight:600}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--surface2);border:1px solid var(--accent);color:var(--text);padding:12px 24px;border-radius:12px;font-size:13px;font-weight:600;z-index:999;transition:transform .3s ease;white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* POINTAGES — pleine hauteur */
+#page-pointages{padding:0;display:flex;flex-direction:column;height:calc(100vh - 53px)}
+.pointages-header{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border);flex-shrink:0}
+.pointages-title{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+.refresh-btn{background:var(--surface2);border:1px solid var(--border);color:var(--muted);padding:5px 14px;border-radius:8px;font-size:11px;cursor:pointer;font-family:'Syne',sans-serif;font-weight:600}
 .refresh-btn:hover{color:var(--text);border-color:var(--accent)}
-.table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--border)}
+#pointages-content{flex:1;overflow-y:auto;padding:0}
+
+/* TABLE pleine largeur */
+.table-wrap{border-radius:0;border:none;border-top:1px solid var(--border)}
 table{width:100%;border-collapse:collapse;font-size:12px}
-th{background:var(--surface2);color:var(--muted);font-weight:600;padding:10px 12px;text-align:left;letter-spacing:.06em;text-transform:uppercase;font-size:11px;white-space:nowrap}
-td{padding:10px 12px;border-top:1px solid var(--border);color:var(--text);font-family:'DM Mono',monospace;font-size:11px;white-space:nowrap}
+th{background:var(--surface2);color:var(--muted);font-weight:600;padding:10px 14px;text-align:left;letter-spacing:.06em;text-transform:uppercase;font-size:10px;white-space:nowrap;position:sticky;top:0;z-index:10}
+td{padding:12px 14px;border-top:1px solid var(--border);color:var(--text);font-family:'DM Mono',monospace;font-size:11px;white-space:nowrap}
 tr.open-row td{background:rgba(255,77,109,.06)}
 tr.closed-row td{background:rgba(0,212,170,.03)}
 tr:hover td{background:var(--surface2)}
 .badge-status{display:inline-block;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:700;letter-spacing:.06em}
 .badge-open{background:rgba(255,77,109,.2);color:var(--red)}
 .badge-closed{background:rgba(0,212,170,.2);color:var(--green)}
+
+/* LOADING */
 .loading{text-align:center;padding:40px;color:var(--muted);font-size:13px}
 .spinner{display:inline-block;width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin-right:8px;vertical-align:middle}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+/* SECTION TITLE générique */
+.section-title{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin:20px 0 12px;display:flex;justify-content:space-between;align-items:center}
+
+/* RECAP */
 .recap-header{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:20px}
 .recap-month{font-size:20px;font-weight:800;color:var(--text);margin-bottom:4px}
 .recap-sub{font-size:12px;color:var(--muted);font-family:'DM Mono',monospace}
@@ -101,7 +127,7 @@ tr:hover td{background:var(--surface2)}
 <body>
 
 <nav>
-  <div class="nav-title">⏱ BADGEUSE</div>
+  <div class="nav-icon">⏱</div>
   <div class="nav-tabs">
     <button class="tab active" onclick="showPage('scanner',this)">Scanner</button>
     <button class="tab" onclick="showPage('pointages',this)">Pointages</button>
@@ -109,16 +135,17 @@ tr:hover td{background:var(--surface2)}
   </div>
 </nav>
 
+<!-- PAGE SCANNER -->
 <div class="page active" id="page-scanner">
   <div class="badge-hero">
-    <h1>Badgeuse NFC</h1>
-    <p id="current-time">--:--:--</p>
+    <div class="live-clock" id="current-time">--:--:--</div>
   </div>
+
   <div class="status-card" id="status-card">
     <div class="status-label"><span class="status-dot" id="status-dot"></span><span id="status-text">Vérification...</span></div>
     <div class="status-time" id="status-time">--:--</div>
-    <div class="status-sub" id="status-sub">Chargement en cours</div>
   </div>
+
   <div class="stats-row">
     <div class="stat-card">
       <div class="stat-label">Aujourd'hui</div>
@@ -129,6 +156,7 @@ tr:hover td{background:var(--surface2)}
       <div class="stat-value" id="week-hours">--:--</div>
     </div>
   </div>
+
   <div class="btn-row">
     <button class="btn btn-start" id="btn-start" onclick="handleScan('start')">
       <span class="btn-icon">▶</span>
@@ -141,11 +169,16 @@ tr:hover td{background:var(--surface2)}
   </div>
 </div>
 
+<!-- PAGE POINTAGES — pleine hauteur -->
 <div class="page" id="page-pointages">
-  <div class="section-title">Sessions <button class="refresh-btn" onclick="loadPointages()">↻ Actualiser</button></div>
+  <div class="pointages-header">
+    <span class="pointages-title">Sessions</span>
+    <button class="refresh-btn" onclick="loadPointages()">↻ Actualiser</button>
+  </div>
   <div id="pointages-content" class="loading"><span class="spinner"></span>Chargement...</div>
 </div>
 
+<!-- PAGE RECAP -->
 <div class="page" id="page-recap">
   <div id="recap-content" class="loading"><span class="spinner"></span>Chargement...</div>
 </div>
@@ -159,7 +192,6 @@ const API_KEY='AIzaSyCFdgyzjA97tI5SiTBIcEJdgj4lAYRHQus';
 const BASE=`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values`;
 
 let sessionOpen=false;
-let timerInterval=null;
 
 setInterval(()=>{
   document.getElementById('current-time').textContent=new Date().toLocaleTimeString('fr-FR');
@@ -221,19 +253,16 @@ async function loadStatus(){
       card.className='status-card open';
       dot.className='status-dot open';
       document.getElementById('status-text').textContent='SESSION EN COURS';
-      document.getElementById('status-time').textContent=openRow[2]||'--:--';
-      document.getElementById('status-sub').textContent='Depuis '+( openRow[1]||'');
+      document.getElementById('status-time').textContent='Depuis '+( openRow[2]||'--:--');
     }else{
       card.className='status-card closed';
       dot.className='status-dot closed';
       document.getElementById('status-text').textContent='AUCUNE SESSION';
       const last=[...rows].reverse().find(r=>r[5]==='closed');
       if(last){
-        document.getElementById('status-time').textContent=last[3]||'--:--';
-        document.getElementById('status-sub').textContent='Dernière fin · '+(last[1]||'');
+        document.getElementById('status-time').textContent='Dernière fin · '+(last[3]||'--:--');
       }else{
         document.getElementById('status-time').textContent='--:--';
-        document.getElementById('status-sub').textContent='Aucune session enregistrée';
       }
     }
     updateBtns();
@@ -253,8 +282,7 @@ function updateBtns(){
 
 async function handleScan(type){
   const btn=document.getElementById(type==='start'?'btn-start':'btn-stop');
-  btn.disabled=true;
-  btn.style.opacity='0.6';
+  btn.disabled=true;btn.style.opacity='0.6';
   try{
     let lat='0',lng='0';
     try{
@@ -269,12 +297,9 @@ async function handleScan(type){
     if(resp.ok||resp.status===200){
       showToast(type==='start'?'🟢 Session démarrée !':'🔴 Session terminée !',type==='start'?'var(--green)':'var(--red)');
       setTimeout(()=>loadStatus(),2500);
-    }else{
-      showToast('⚠️ Erreur webhook','var(--red)');
-    }
+    }else{showToast('⚠️ Erreur webhook','var(--red)');}
   }catch(e){showToast('⚠️ Erreur réseau','var(--red)');}
-  btn.style.opacity='1';
-  updateBtns();
+  btn.style.opacity='1';updateBtns();
 }
 
 async function loadPointages(){
@@ -284,7 +309,7 @@ async function loadPointages(){
     const data=rows.filter(r=>r[0]).reverse();
     if(!data.length){document.getElementById('pointages-content').innerHTML='<div class="loading">Aucune session</div>';return;}
     let html='<div class="table-wrap"><table><thead><tr><th>Date</th><th>Début</th><th>Fin</th><th>Durée</th><th>Statut</th><th>H.Supp</th></tr></thead><tbody>';
-    data.slice(0,50).forEach(r=>{
+    data.forEach(r=>{
       const isOpen=r[5]==='open';
       html+=`<tr class="${isOpen?'open-row':'closed-row'}"><td>${r[1]||'-'}</td><td>${r[2]||'-'}</td><td>${r[3]||'-'}</td><td>${r[4]||'-'}</td><td><span class="badge-status ${isOpen?'badge-open':'badge-closed'}">${r[5]||'-'}</span></td><td>${r[13]||'0:00'}</td></tr>`;
     });
@@ -307,6 +332,7 @@ async function loadRecap(){
       if(row[0]==='Solde (±)')solde=row[1]||'-';
     });
     document.getElementById('recap-content').innerHTML=`
+      <div style="padding:20px">
       <div class="recap-header">
         <div class="recap-month">${months[now.getMonth()]} ${now.getFullYear()}</div>
         <div class="recap-sub">Récapitulatif mensuel automatique</div>
@@ -321,7 +347,8 @@ async function loadRecap(){
       <div class="table-wrap"><table><thead><tr><th>Jour</th><th>Matin</th><th>Après-midi</th><th>Total</th></tr></thead><tbody>
         <tr><td>Lun → Jeu</td><td>8h45 – 13h00</td><td>14h00 – 17h30</td><td>7h30</td></tr>
         <tr><td>Vendredi</td><td>8h45 – 12h45</td><td>—</td><td>4h00</td></tr>
-      </tbody></table></div>`;
+      </tbody></table></div>
+      </div>`;
   }catch(e){document.getElementById('recap-content').innerHTML='<div class="loading">Erreur de chargement</div>';}
 }
 
