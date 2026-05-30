@@ -238,7 +238,10 @@ async function handleScan(type){
   try{
     let lat='0',lng='0';
     try{const pos=await new Promise((res,rej)=>navigator.geolocation.getCurrentPosition(res,rej,{timeout:5000}));lat=pos.coords.latitude.toFixed(6);lng=pos.coords.longitude.toFixed(6);}catch(e){}
-    const ts=new Date().toISOString().slice(0,19);
+    const now2=new Date();
+    const offset=now2.getTimezoneOffset();
+    const local=new Date(now2.getTime()-offset*60000);
+    const ts=local.toISOString().slice(0,19);
     const resp=await fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({timestamp:ts,lat,lng,maps_link:`https://maps.google.com/?q=${lat},${lng}`})});
     if(resp.ok||resp.status===200){
       showToast(type==='start'?'🟢 Session démarrée !':'🔴 Session terminée !',type==='start'?'var(--green)':'var(--red)');
